@@ -1,0 +1,96 @@
+/* ================= THIẾT LẬP CHUNG ================= */
+.root {
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-background-color: #F4F7FC; /* Màu nền xám xanh nhạt cực kỳ hiện đại */
+}
+
+/* ================= SIDEBAR (THANH BÊN TRÁI) ================= */
+.sidebar {
+    -fx-background-color: #1E293B; /* Xám đen đậm tĩnh lặng */
+    -fx-padding: 20px;
+}
+.sidebar-title {
+    -fx-text-fill: #94A3B8;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 10 0;
+}
+
+/* Các nút trong Sidebar */
+.sidebar-btn {
+    -fx-background-color: #334155;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+    -fx-cursor: hand;
+}
+.sidebar-btn:hover {
+    -fx-background-color: #3B82F6; /* Di chuột vào thì sáng màu xanh dương */
+}
+.sidebar-btn-chat {
+    -fx-background-color: #8B5CF6; /* Nút chat màu tím nổi bật */
+}
+.sidebar-btn-chat:hover {
+    -fx-background-color: #A78BFA;
+}
+
+/* ================= BẢNG KANBAN (3 HÀNG NGANG) ================= */
+.task-row {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    /* Hiệu ứng đổ bóng mờ ảo (Drop Shadow) */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 15, 0, 0, 4);
+    -fx-padding: 5px;
+}
+
+/* Header của từng hàng */
+.row-header {
+    -fx-padding: 12px 20px;
+    -fx-background-radius: 10px 10px 0 0;
+}
+.header-todo { -fx-background-color: #FEE2E2; } /* Nền đỏ nhạt */
+.text-todo { -fx-text-fill: #EF4444; -fx-font-weight: bold; -fx-font-size: 14px; }
+
+.header-inprogress { -fx-background-color: #FEF3C7; } /* Nền vàng nhạt */
+.text-inprogress { -fx-text-fill: #F59E0B; -fx-font-weight: bold; -fx-font-size: 14px; }
+
+.header-done { -fx-background-color: #D1FAE5; } /* Nền xanh lá nhạt */
+.text-done { -fx-text-fill: #10B981; -fx-font-weight: bold; -fx-font-size: 14px; }
+
+/* Nút Action (Nhận việc, Hoàn thành) */
+.action-btn {
+    -fx-background-color: white;
+    -fx-background-radius: 20px; /* Nút hình viên thuốc */
+    -fx-padding: 5px 15px;
+    -fx-cursor: hand;
+    /* Đổ bóng nhẹ cho nút */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+.action-btn-todo { -fx-text-fill: #EF4444; -fx-font-weight: bold; }
+.action-btn-todo:hover { -fx-background-color: #EF4444; -fx-text-fill: white; }
+
+.action-btn-inprogress { -fx-text-fill: #F59E0B; -fx-font-weight: bold; }
+.action-btn-inprogress:hover { -fx-background-color: #F59E0B; -fx-text-fill: white; }
+
+/* ================= DANH SÁCH (LISTVIEW) ================= */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.list-cell {
+    -fx-padding: 12px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #334155;
+    -fx-border-color: transparent transparent #E2E8F0 transparent; /* Dòng kẻ mờ dưới mỗi task */
+}
+.list-cell:empty {
+    -fx-border-color: transparent;
+}
+.list-cell:selected {
+    -fx-background-color: #E0F2FE; /* Màu nền khi click chọn task */
+    -fx-text-fill: #0284C7;
+    -fx-font-weight: bold;
+}
+.action-btn-done { -fx-text-fill: #10B981; -fx-font-weight: bold; }
+.action-btn-done:hover { -fx-background-color: #10B981; -fx-text-fill: white; }

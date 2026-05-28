@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khám Phá Đà Nẵng - Mai Bách Quân</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #0284c7;
+            --dark-color: #0f172a;
+            --light-bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--light-bg);
+            color: #334155;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: var(--dark-color);
+            letter-spacing: -0.02em;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #ffffff !important;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.75) !important;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+        }
+        .navbar-brand {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            color: #475569 !important;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Hero Carousel Customization */
+        #trangchu {
+            margin-top: 80px; /* Offset for fixed navbar */
+            padding-top: 20px;
+        }
+        .carousel-item {
+            height: 70vh;
+            border-radius: 24px;
+}
+        .carousel-item img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+            border-radius: 24px;
+        }
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.2));
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        .carousel-overlay h1 {
+            color: white;
+            font-size: 4rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        .carousel-overlay p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s;
+            animation-fill-mode: both;
+        }
+        .carousel-indicators [data-bs-target] {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        .carousel-indicators .active {
+            opacity: 1;
+            transform: scale(1.3);
+            background-color: var(--primary-color);
+        }
+
+        /* Cards */
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+        }
+        .info-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.15);
+        }
+        .info-card img {
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .info-card:hover img {
+            transform: scale(1.05);
+        }
+        .card-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            z-index: 2;
+        }
+
+        /* Buttons */
+        .btn-custom {
+background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            z-index: -1;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        .btn-custom:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+        }
+        .btn-custom:hover::before {
+            opacity: 1;
+        }
+
+        /* Section Details */
+        .detail-section {
+            padding: 80px 0;
+        }
+        .title-separator {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            margin: 20px auto 40px;
+            border-radius: 10px;
+        }
+        .detail-card {
+            background: white;
+            border-radius: 30px;
+            padding: 3rem;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .detail-card:hover {
+            box-shadow: 0 20px 50px rgba(14, 165, 233, 0.1);
+        }
+        .detail-img {
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease;
+        }
+        .detail-card:hover .detail-img {
+            transform: scale(1.02);
+        }
+
+        /* Contact Form */
+        .contact-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 100px 0;
+            margin-top: 50px;
+            position: relative;
+            color: white;
+            overflow: hidden;
+        }
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 15px;
+            padding: 15px 20px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.1);
+border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+            color: white;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .form-label {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f172a;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        /* Keyframes */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Gradient Text Utility */
+        .text-gradient {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Image Hover Scale */
+        .hover-scale {
+            transition: transform 0.5s ease;
+        }
+        .detail-card:hover .hover-scale {
+            transform: scale(1.1);
+        }
+        
+        
+        /* Features List */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-list li {
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed rgba(0,0,0,0.1);
+        }
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        .feature-list i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.2rem;
+            background: rgba(14, 165, 233, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        /* Media Queries for responsiveness */
+        @media (max-width: 768px) {
+            .carousel-item {
+                height: 50vh;
+            }
+            .carousel-overlay h1 {
+                font-size: 2.5rem;
+            }
+            .detail-card {
+                padding: 1.5rem;
+            }
+            .contact-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+                <i class="fa-solid fa-compass text-primary"></i>
+                Đà Nẵng
+            </a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fa-solid fa-bars-staggered text-dark"></i>
+            </button>
+<div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-3">
+                    <li class="nav-item"><a class="nav-link" href="#trangchu">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#khampha">Khám phá</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#chitiet">Chi tiết</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#lienhe">Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="trangchu" class="container">
+        <div id="imageCarousel" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel" data-aos="fade-up" data-aos-duration="1000">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#imageCarousel" data-bs-slide-to="2"></button>
+            </div>
+            <div class="carousel-inner" style="border-radius: 24px;">
+                <div class="carousel-item active" data-bs-interval="5000">
+                    <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?q=80&w=2000&auto=format&fit=crop" class="d-block w-100" alt="Cầu Vàng" onerror="this.src='cauvang.jpg'">
+                    <div class="carousel-overlay">
+                        <h1>Khám Phá Đà Nẵng</h1>
+                        <p>Thành phố đáng sống nhất Việt Nam</p>
+                        <a href="#khampha" class="btn btn-custom mt-4 px-5 py-3">Bắt Đầu Hành Trình</a>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="https://images.unsplash.com/photo-1583417646961-001097e3f898?q=80&w=2000&auto=format&fit=crop" class="d-block w-100" alt="Cầu Rồng" onerror="this.src='caurong.jpg'">
+                    <div class="carousel-overlay">
+                        <h1>Nhịp Sống Sôi Động</h1>
+                        <p>Vẻ đẹp lộng lẫy khi màn đêm buông xuống</p>
+                        <a href="#khampha" class="btn btn-custom mt-4 px-5 py-3">Khám Phá Ngay</a>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="5000">
+                    <img src="https://images.unsplash.com/photo-1535782012019-33b8fbdd8ddb?q=80&w=2000&auto=format&fit=crop" class="d-block w-100" alt="Biển Đà Nẵng" onerror="this.src='bien.jpg'">
+                    <div class="carousel-overlay">
+                        <h1>Thiên Nhiên Tuyệt Mỹ</h1>
+                        <p>Biển xanh, cát trắng, nắng vàng</p>
+<a href="#khampha" class="btn btn-custom mt-4 px-5 py-3">Tìm Hiểu Thêm</a>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- Khám Phá -->
+    <section id="khampha" class="container mt-5 pt-5">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-6 fw-bold">Trải Nghiệm <span class="text-gradient">Độc Đáo</span></h2>
+            <div class="title-separator"></div>
+            <p class="text-muted fs-5">Những điểm nhấn không thể bỏ lỡ khi đến với Đà Nẵng</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card info-card border-0 position-relative">
+                    <div class="card-icon"><i class="fa-solid fa-bridge-water"></i></div>
+                    <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600" class="card-img-top" alt="Cầu">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <h4 class="fw-bold mb-3">Những Cây Cầu</h4>
+                        <p class="text-muted mb-4">Biểu tượng của sự hiện đại và khát vọng vươn xa của thành phố trẻ.</p>
+                        <a href="#chitiet-cau" class="btn btn-custom mt-auto align-self-start">Xem chi tiết <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="card info-card border-0 position-relative">
+                    <div class="card-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+                    <img src="https://image.bnews.vn/MediaUpload/Org/2022/07/13/anh-1-4-20220713090453.jpg" class="card-img-top" alt="Cảnh">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <h4 class="fw-bold mb-3">Phong Cảnh</h4>
+                        <p class="text-muted mb-4">Tuyệt tác thiên nhiên giữa lòng phố thị, sự giao hòa hoàn hảo.</p>
+                        <a href="#chitiet-phongcanh" class="btn btn-custom mt-auto align-self-start">Xem chi tiết <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                    </div>
+</div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                <div class="card info-card border-0 position-relative">
+                    <div class="card-icon"><i class="fa-solid fa-utensils"></i></div>
+                    <img src="https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600" class="card-img-top" alt="Ẩm thực">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <h4 class="fw-bold mb-3">Ẩm Thực</h4>
+                        <p class="text-muted mb-4">Hương vị mặn mà khó quên của miền Trung đậm đà tình người.</p>
+                        <a href="#chitiet-amthuc" class="btn btn-custom mt-auto align-self-start">Xem chi tiết <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                <div class="card info-card border-0 position-relative">
+                    <div class="card-icon"><i class="fa-solid fa-masks-theater"></i></div>
+                    <img src="https://bizweb.dktcdn.net/100/539/761/files/chua-tam-thai.jpg?v=1741137581311" class="card-img-top" alt="Văn hóa">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <h4 class="fw-bold mb-3">Văn Hóa</h4>
+                        <p class="text-muted mb-4">Giá trị truyền thống và những lễ hội mang tầm vóc quốc tế.</p>
+                        <a href="#chitiet-vanhoa" class="btn btn-custom mt-auto align-self-start">Xem chi tiết <i class="fa-solid fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Details Sections -->
+    <div id="chitiet" class="container mt-5 pt-5">
+        
+        <!-- Cầu -->
+        <section id="chitiet-cau" class="detail-section">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-semibold">Kiến trúc độc đáo</span>
+                <h2 class="fw-bold display-6 mb-3">Thành Phố Của Những <span class="text-gradient">Cây Cầu</span></h2>
+                <p class="fs-5 text-muted">Sông Hàn không chỉ là dòng sông thơ mộng mà còn hội tụ những kỳ quan kiến trúc ấn tượng.</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://nads.1cdn.vn/2025/01/10/W_ban-chieu7.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Cầu Rồng">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Cầu Rồng</h4>
+                            <p class="text-muted mb-0">Biểu tượng của khát vọng vươn mình ra biển lớn.<br><br>
+
+Thiết kế độc bản: Mô phỏng hình dáng con rồng thời Lý mạnh mẽ. Đây là cây cầu dạng vòm thép đơn đầu tiên tại Đông Nam Á.<br><br>
+
+Điểm nhấn thu hút: Màn trình diễn phun lửa và phun nước diễn ra vào lúc 21:00 tối thứ Sáu, thứ Bảy, Chủ nhật hàng tuần và các ngày lễ lớn.<br><br>
+
+Thông số ấn tượng: Cầu dài 666m, rộng 37.5m với 6 làn xe. Toàn thân rồng được gắn 2.500 đèn LED thông minh có khả năng thay đổi màu sắc linh hoạt theo chủ đề.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+<img src="https://diff.vn/wp-content/uploads/2025/03/Cau-quay-song-han-1-1.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Cầu Sông Hàn">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Cầu Sông Hàn</h4>
+                            <p class="text-muted mb-0">Cây cầu quay duy nhất và là niềm tự hào về sự đồng lòng của người dân.<br><br>
+
+Lịch sử đặc biệt: Đây là cây cầu xoay đầu tiên do kỹ sư và công nhân Việt Nam tự thiết kế, thi công, và đặc biệt là được xây dựng bằng tiền đóng góp của chính người dân Đà Nẵng.<br><br>
+
+Cơ chế hoạt động: Hàng đêm, phần giữa cầu sẽ quay 90 độ quanh trục để mở đường cho tàu lớn đi qua.<br><br>
+
+Lịch quay: Thường diễn ra từ 23:00 đến 24:00 vào hai ngày cuối tuần (Thứ 7 và Chủ nhật). Việc chứng kiến cây cầu khổng lồ chuyển động lừng lững giữa sông là trải nghiệm rất thú vị.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=600" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Cầu Vàng">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Cầu Vàng</h4>
+                            <p class="text-muted mb-0">Kiệt tác nghệ thuật giữa mây ngàn Bà Na Hills.<br><br>
+
+Vị trí đắc địa: Nằm ở độ cao hơn 1.400m so với mực nước biển tại khu du lịch Sun World Ba Na Hills. Cầu dài 150m, nối liền trạm cáp treo với các khu vườn hoa.<br><br>
+
+Kiến trúc gây bão truyền thông: Hình ảnh đôi bàn tay khổng lồ loang lổ rêu phong (tượng trưng cho bàn tay của thần núi) nâng đỡ dải lụa vàng óng ả. Tờ Time từng bình chọn đây là một trong 100 điểm đến tuyệt vời nhất thế giới.<br><br>
+
+Trải nghiệm: Vào những ngày có mây, đi bước trên cầu bạn sẽ có cảm giác như đang dạo bước trên mây trời, nhìn xuống toàn cảnh rừng núi và thành phố Đà Nẵng từ xa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Phong cảnh -->
+        <section id="chitiet-phongcanh" class="detail-section">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-semibold">Thiên nhiên</span>
+                <h2 class="fw-bold display-6 mb-3">Vẻ Đẹp Phong Cảnh <span class="text-gradient">Tự Nhiên</span></h2>
+                <p class="fs-5 text-muted">Sự giao thoa tuyệt vời giữa núi cao, rừng xanh và biển bạc.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://havi-web.s3.ap-southeast-1.amazonaws.com/bien_my_khe_da_nang_2_11zon_1_a3a8e98ee1.webp" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Biển Mỹ Khê">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Biển Mỹ Khê</h4>
+                            <p class="text-muted mb-0">Bãi biển quyến rũ nhất hành tinh vẫy gọi.<br><br>
+
+Danh xưng quốc tế: Từng được tạp chí kinh tế hàng đầu của Mỹ - Forbes bình chọn là một trong sáu bãi biển quyến rũ nhất hành tinh.<br><br>
+
+Cảnh quan tuyệt mỹ: Sở hữu đường bờ biển cong lưỡi liềm tuyệt đẹp, bãi cát trắng mịn màng, độ dốc thoai thoải và làn nước trong xanh, ấm áp quanh năm.<br><br>
+
+Trải nghiệm đa dạng: Không chỉ là nơi tắm biển lý tưởng, đại ca còn có thể thử sức với các trò chơi cảm giác mạnh như dù lượn, motor nước, lướt ván, hoặc thư giãn thưởng thức hải sản tươi sống tại các nhà hàng ven biển.</p>
+                        </div>
+                    </div>
+                </div>
+<div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://cdn3.ivivu.com/2024/08/ba-na-hill-iVIVU1-e1724662224847.png" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Bà Nà Hills">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Bà Nà Hills</h4>
+                            <p class="text-muted mb-0">Chốn bồng lai tiên cảnh giữa trần gian.<br><br>
+
+Khí hậu độc đáo: Nơi duy nhất mang đến trải nghiệm thời tiết 4 mùa luân chuyển trong cùng một ngày: Xuân rạng rỡ ban mai, Hạ oi ả ban trưa, Thu dịu mát xế chiều và Đông se lạnh khi đêm về.<br><br>
+
+Kiến trúc & Giải trí: Lạc bước vào Làng Pháp lãng mạn mang đậm dấu ấn kiến trúc châu Âu cổ kính, check-in tại các vườn hoa rực rỡ và bung xõa hết mình tại công viên giải trí trong nhà khổng lồ Fantasy Park.<br><br>
+
+Hành trình trên mây: Di chuyển bằng hệ thống cáp treo đạt nhiều kỷ lục Guinness thế giới, mang đến góc nhìn ngoạn mục bao quát toàn bộ núi rừng nguyên sinh hùng vĩ.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://images.vietnamtourism.gov.vn/vn/images/2021/Thang_5/son_tra.jpeg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Bán đảo Sơn Trà">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Bán đảo Sơn Trà</h4>
+                            <p class="text-muted mb-0">Viên ngọc xanh và điểm nhìn ôm trọn thành phố.<br><br>
+
+Hệ sinh thái quý giá: Được ví như "lá phổi xanh" khổng lồ điều hòa khí hậu cho Đà Nẵng. Đây cũng là ngôi nhà của Voọc chà vá chân nâu - loài vật vô cùng quý hiếm được mệnh danh là "nữ hoàng linh trưởng".<br><br>
+
+Điểm đến tâm linh: Nơi tọa lạc của Chùa Linh Ứng Bãi Bụt với bức tượng Phật Bà Quan Âm cao nhất Việt Nam (67m), uy nghi hướng mắt ra biển Đông che chở cho ngư dân.<br><br>
+
+Thiên đường cho dân xê dịch: Những cung đường đèo uốn lượn dẫn lên Đỉnh Bàn Cờ, Cây Đa Ngàn Năm hay Mũi Nghê là hành trình phượt lý tưởng để đại ca phóng tầm mắt ngắm trọn vẹn bờ biển và toàn cảnh thành phố Đà Nẵng từ trên cao.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ẩm thực -->
+        <section id="chitiet-amthuc" class="detail-section">
+    <div class="text-center mb-5" data-aos="fade-up">
+        <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-semibold">Đặc sản</span>
+        <h2 class="fw-bold display-6 mb-3">Tinh Hoa <span class="text-gradient">Ẩm Thực</span> Bản Địa</h2>
+        <p class="fs-5 text-muted">Hương vị đậm đà khó quên mang trọn nét văn hóa miền Trung.</p>
+    </div>
+
+    <div class="row justify-content-center g-4">
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="detail-card p-3 h-100">
+                <div class="overflow-hidden rounded-4 mb-3" style="height: 300px;">
+                    <img src="https://images2.thanhnien.vn/528068263637045248/2024/11/12/1000022316-1731386167793124667085.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Mì Quảng">
+                </div>
+                <div class="p-3">
+                    <h4 class="fw-bold mb-2">Mì Quảng</h4>
+                    <p class="text-muted mb-0">Linh hồn của ẩm thực xứ Quảng. Sợi mì dai mềm, nước lèo tôm thịt sền sệt đậm đà, ăn kèm với bánh tráng nướng giòn rụm và rau sống tươi mát mang lại trải nghiệm bùng nổ hương vị.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="detail-card p-3 h-100">
+                <div class="overflow-hidden rounded-4 mb-3" style="height: 300px;">
+                    <img src="https://statics.vinpearl.com/banh-trang-cuon-thit-heo-_1629006440.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Bánh Tráng Cuốn Thịt Heo">
+                </div>
+                <div class="p-3">
+                    <h4 class="fw-bold mb-2">Bánh Tráng Cuốn Thịt Heo</h4>
+                    <p class="text-muted mb-0">Sự kết hợp hoàn hảo giữa những lát thịt heo hai đầu da luộc mềm mại, cuốn cùng vô vàn loại rau sống đa dạng. Linh hồn của món ăn chính là chén mắm nêm đậm vị thơm lừng đánh thức mọi giác quan.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="detail-card p-3 h-100">
+                <div class="overflow-hidden rounded-4 mb-3" style="height: 300px;">
+                    <img src="https://static.vinwonders.com/2022/05/bun-cha-ca-da-nang-3.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Bún Chả Cá">
+                </div>
+                <div class="p-3">
+                    <h4 class="fw-bold mb-2">Bún Chả Cá</h4>
+                    <p class="text-muted mb-0">Nước dùng thanh ngọt hầm từ xương cá, kết hợp cùng những lát chả cá dai giòn, đậm đà gia vị. Món ăn hòa quyện hoàn hảo với bắp cải, bí đỏ và chút mắm ruốc đặc trưng của miền biển.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- Văn hóa -->
+        <section id="chitiet-vanhoa" class="detail-section">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill mb-3 fw-semibold">Truyền thống & Sự kiện</span>
+                <h2 class="fw-bold display-6 mb-3">Văn Hóa <span class="text-gradient">Đặc Sắc</span></h2>
+                <p class="fs-5 text-muted">Những nét đẹp truyền thống hòa quyện cùng sự kiện quốc tế.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://danangfantasticity.com/wp-content/uploads/2025/03/le-hoi-phao-hoa-quoc-te-da-nang-diff-2025-tat-tan-tat-nhung-dieu-ban-can-biet-01.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Lễ hội pháo hoa quốc tế">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Lễ Hội Pháo Hoa (DIFF)</h4>
+                            <p class="text-muted mb-0">Sự kiện mang tầm vóc quốc tế được tổ chức bên bờ sông Hàn.<br><br>Bữa tiệc ánh sáng: Quy tụ các đội thi pháo hoa hàng đầu thế giới với những màn trình diễn mãn nhãn kết hợp âm nhạc đỉnh cao.<br><br>Hoạt động đồng hành: Không khí lễ hội lan tỏa khắp thành phố với các chuỗi sự kiện văn hóa, nghệ thuật, âm nhạc và ẩm thực đường phố sôi động.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://cdnmedia.baotintuc.vn/2014/08/26/17/00/non-nuoc.jpg" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Làng đá Non Nước">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Làng Đá Non Nước</h4>
+                            <p class="text-muted mb-0">Làng nghề truyền thống với hơn 400 năm lịch sử dưới chân Ngũ Hành Sơn.<br><br>Nghệ thuật điêu khắc: Mỗi tác phẩm đều là sự kết tinh từ mồ hôi, tâm huyết và đôi bàn tay tài hoa của các nghệ nhân làng đá.<br><br>Di sản văn hóa: Không chỉ là nơi sản xuất các tác phẩm điêu khắc nghệ thuật tinh xảo, làng nghề còn được công nhận là Di sản văn hóa phi vật thể cấp quốc gia.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="detail-card p-3 h-100">
+                        <div class="overflow-hidden rounded-4 mb-3" style="height: 250px;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTmzJKqiY3xkfbLXpwosuwuQrVor2q6yJvxQ&s" class="img-fluid w-100 h-100 object-fit-cover transition hover-scale" alt="Lễ hội Quán Thế Âm">
+                        </div>
+                        <div class="p-3">
+                            <h4 class="fw-bold mb-2">Lễ Hội Quán Thế Âm</h4>
+                            <p class="text-muted mb-0">Một trong những lễ hội tôn giáo lớn nhất cả nước, diễn ra vào ngày 19/2 Âm lịch hàng năm.<br><br>Giao lưu văn hóa: Điểm hẹn văn hóa Phật giáo, cầu quốc thái dân an, và là nơi giao lưu tín ngưỡng với các đoàn Phật giáo quốc tế.<br><br>Nét đẹp tâm linh: Gồm các nghi lễ truyền thống trang nghiêm như lễ rước tôn tượng Quán Thế Âm, cùng phần hội náo nhiệt với hội đua thuyền, hát bài chòi và thi cờ người.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <!-- Liên hệ -->
+    <section id="lienhe" class="contact-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="zoom-in" data-aos-duration="800">
+                    <div class="contact-card shadow-lg">
+                        <div class="text-center mb-5">
+                            <h2 class="display-5 fw-bold mb-3">Kết Nối Với <span class="text-gradient">Chúng Tôi</span></h2>
+                            <p class="opacity-75 fs-5">Hãy để lại lời nhắn, tôi sẽ liên hệ lại sớm nhất!</p>
+                        </div>
+                        <form id="contactForm">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <label class="form-label">Họ và Tên</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Ví dụ: Nguyễn Văn A" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Nội dung tin nhắn</label>
+<textarea class="form-control" rows="5" id="message" placeholder="Bạn muốn chia sẻ điều gì?" required></textarea>
+                                </div>
+                                <div class="col-12 text-center mt-5">
+                                    <button type="submit" class="btn btn-custom btn-lg px-5 w-100 shadow-lg">
+                                        <i class="fa-regular fa-paper-plane ms-2"></i> Gửi Thông Điệp
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative blobs -->
+        <div class="position-absolute top-0 start-0 translate-middle rounded-circle bg-primary opacity-25" style="width: 300px; height: 300px; filter: blur(50px);"></div>
+        <div class="position-absolute bottom-0 end-0 rounded-circle bg-info opacity-25" style="width: 400px; height: 400px; filter: blur(60px);"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-white text-center py-5 mt-auto position-relative z-1">
+        <div class="container">
+            <div class="mb-4">
+                <a href="#" class="text-white text-decoration-none mx-2 fs-4 opacity-75 transition"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#" class="text-white text-decoration-none mx-2 fs-4 opacity-75 transition"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" class="text-white text-decoration-none mx-2 fs-4 opacity-75 transition"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <h4 class="fw-bold mb-2 text-gradient d-inline-block">Group Young Pilot</h4>
+            <p class="mb-1 opacity-75">Sinh viên Khóa 25 - Ngành Kỹ thuật máy tính</p>
+            <p class="mb-0 opacity-75 small">Đại học CNTT&TT Việt - Hàn (VKU)</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Khởi tạo AOS
+        AOS.init({
+            once: true,
+            offset: 50,
+        });
+
+        // Xử lý gửi form mượt mà
+        document.getElementById('contactForm').onsubmit = function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang gửi...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert("Cảm ơn bạn! Thông tin đã được gửi đi thành công.");
+                this.reset();
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }, 1000);
+        };
+        
+        // Navbar change on scroll
+window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('scrolled');
+            } else {
+                document.querySelector('.navbar').classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

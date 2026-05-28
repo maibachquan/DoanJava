@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.KanbanController" prefHeight="650.0" prefWidth="1000.0">
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <top>
+        <HBox alignment="CENTER" style="-fx-background-color: white; -fx-padding: 15px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="🚀 WORKSPACE MANAGER" style="-fx-text-fill: #1E293B;">
+                <font><Font name="Segoe UI Bold" size="22.0" /></font>
+            </Label>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="12.0" styleClass="sidebar" prefWidth="250.0">
+            <Label text="KHÔNG GIAN LÀM VIỆC" styleClass="sidebar-title"/>
+
+            <ListView fx:id="lvGroups" VBox.vgrow="ALWAYS" styleClass="list-view"/>
+
+            <Button text="+ Tạo nhóm mới" onAction="#handleAddGroup" maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="+ Mời thành viên" onAction="#handleAddMember" maxWidth="Infinity" styleClass="sidebar-btn"/>
+            <Button text="💬 Vào Chat Nhóm" onAction="#handleOpenChat" maxWidth="Infinity" styleClass="sidebar-btn, sidebar-btn-chat"/>
+            <Button text="🚪 Thoát khỏi nhóm" onAction="#handleLeaveGroup" maxWidth="Infinity" style="-fx-background-color: transparent; -fx-text-fill: #EF4444; -fx-border-color: #EF4444; -fx-border-radius: 8px; -fx-font-weight: bold; -fx-cursor: hand;"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="20.0" BorderPane.alignment="CENTER">
+            <padding><Insets bottom="25.0" left="30.0" right="30.0" top="25.0" /></padding>
+
+            <VBox VBox.vgrow="ALWAYS" styleClass="task-row">
+                <HBox alignment="CENTER_LEFT" styleClass="row-header, header-todo">
+                    <Label text="🎯 CẦN LÀM (TODO)" styleClass="text-todo"/>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button text="Nhận việc này ➔" onAction="#handleAcceptTask" styleClass="action-btn, action-btn-todo"/>
+                </HBox>
+                <ListView fx:id="lvTodo" VBox.vgrow="ALWAYS" styleClass="list-view"/>
+            </VBox>
+
+            <VBox VBox.vgrow="ALWAYS" styleClass="task-row">
+                <HBox alignment="CENTER_LEFT" styleClass="row-header, header-inprogress">
+                    <Label text="⚡ ĐANG LÀM (IN PROGRESS)" styleClass="text-inprogress"/>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Button text="Đã hoàn thành ✔" onAction="#handleCompleteTask" styleClass="action-btn, action-btn-inprogress"/>
+                </HBox>
+                <ListView fx:id="lvInProgress" VBox.vgrow="ALWAYS" styleClass="list-view"/>
+            </VBox>
+
+            <VBox VBox.vgrow="ALWAYS" styleClass="task-row">
+                <HBox alignment="CENTER_LEFT" styleClass="row-header, header-done">
+                    <Label text="🎉 ĐÃ XONG (DONE)" styleClass="text-done"/>
+                    <Region HBox.hgrow="ALWAYS" /> <Button text="📎 Xem file đính kèm" onAction="#handleViewAttachment" styleClass="action-btn, action-btn-done"/>
+                </HBox>
+                <ListView fx:id="lvDone" VBox.vgrow="ALWAYS" styleClass="list-view"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="15.0" style="-fx-padding: 15px 30px; -fx-background-color: white; -fx-border-color: #E2E8F0 transparent transparent transparent;">
+            <Button text="+ Giao việc mới" onAction="#handleAddTask" style="-fx-background-color: #3B82F6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8px 20px; -fx-cursor: hand;"/>
+            <Button text="Đăng xuất" onAction="#handleLogout" style="-fx-background-color: #EF4444; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-padding: 8px 20px; -fx-cursor: hand;"/>
+        </HBox>
+    </bottom>
+</BorderPane>

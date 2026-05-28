@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<StackPane style="-fx-background-color: #F4F7FC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController" prefHeight="550.0" prefWidth="700.0">
+
+    <VBox alignment="CENTER" spacing="15.0" maxWidth="450.0" maxHeight="500.0" style="-fx-background-color: white; -fx-background-radius: 15px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 25, 0, 0, 10);">
+        <padding><Insets bottom="30.0" left="40.0" right="40.0" top="30.0"/></padding>
+
+        <Label text="TẠO TÀI KHOẢN" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #1E293B;"/>
+
+        <VBox spacing="5.0">
+            <Label text="Tên đăng nhập:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <TextField fx:id="txtRegUsername" promptText="VD: bachquan25" style="-fx-padding: 10px; -fx-background-radius: 6px; -fx-border-color: #CBD5E1; -fx-border-radius: 6px; -fx-background-color: #F8FAFC;"/>
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Email liên hệ:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <TextField fx:id="txtRegEmail" promptText="VD: quan@vku.udn.vn" style="-fx-padding: 10px; -fx-background-radius: 6px; -fx-border-color: #CBD5E1; -fx-border-radius: 6px; -fx-background-color: #F8FAFC;"/>
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Mật khẩu:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <PasswordField fx:id="txtRegPassword" promptText="Tạo mật khẩu an toàn..." style="-fx-padding: 10px; -fx-background-radius: 6px; -fx-border-color: #CBD5E1; -fx-border-radius: 6px; -fx-background-color: #F8FAFC;"/>
+        </VBox>
+
+        <VBox spacing="5.0">
+            <Label text="Xác nhận mật khẩu:" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <PasswordField fx:id="txtRegConfirm" promptText="Nhập lại mật khẩu..." style="-fx-padding: 10px; -fx-background-radius: 6px; -fx-border-color: #CBD5E1; -fx-border-radius: 6px; -fx-background-color: #F8FAFC;"/>
+        </VBox>
+
+        <Label fx:id="lblRegMessage" textFill="#EF4444" wrapText="true" style="-fx-font-weight: bold;"/>
+
+        <Button text="Hoàn tất Đăng ký" onAction="#handleRegisterSubmit" maxWidth="Infinity" style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-padding: 12px; -fx-background-radius: 8px; -fx-cursor: hand;"/>
+
+        <Button text="← Quay lại Đăng nhập" onAction="#handleBackToLogin" style="-fx-background-color: transparent; -fx-text-fill: #64748B; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </VBox>
+</StackPane>

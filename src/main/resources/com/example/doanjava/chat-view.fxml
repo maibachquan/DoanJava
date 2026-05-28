@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+
+<VBox spacing="0" prefHeight="550.0" prefWidth="400.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ChatController">
+
+    <stylesheets>
+        <URL value="@style.css" />
+    </stylesheets>
+
+    <HBox alignment="CENTER" style="-fx-background-color: #8B5CF6; -fx-padding: 18px;">
+        <Label fx:id="lblGroupName" text="💬 CỬA SỔ CHAT" textFill="WHITE">
+            <font><Font name="System Bold" size="16.0" /></font>
+        </Label>
+    </HBox>
+
+    <VBox VBox.vgrow="ALWAYS" style="-fx-background-color: #F8FAFC;">
+        <padding><Insets bottom="15.0" left="15.0" right="15.0" top="15.0" /></padding>
+        <ListView fx:id="lvChatMessages" VBox.vgrow="ALWAYS" styleClass="list-view" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-control-inner-background: transparent; -fx-font-size: 14px;" />
+    </VBox>
+
+    <HBox spacing="10.0" alignment="CENTER" style="-fx-padding: 15px; -fx-background-color: white; -fx-border-color: #E2E8F0 transparent transparent transparent; -fx-border-width: 1px 0 0 0;">
+        <TextField fx:id="txtChatInput" promptText="Nhập nội dung tin nhắn..." HBox.hgrow="ALWAYS" onAction="#handleSendMessage" style="-fx-padding: 12px 18px; -fx-background-radius: 25px; -fx-border-color: #CBD5E1; -fx-border-radius: 25px; -fx-background-color: #F4F7FC; -fx-font-size: 13px;"/>
+        <Button text="Gửi ➔" onAction="#handleSendMessage" style="-fx-background-color: #8B5CF6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 25px; -fx-padding: 12px 20px; -fx-cursor: hand;" />
+    </HBox>
+</VBox>
